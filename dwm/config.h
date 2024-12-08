@@ -133,7 +133,8 @@ static const Key keys[] = {
         { Mod1Mask,              XK_c,      spawn,          SHCMD("chromium") },
 	{Mod1Mask,   XK_s,             spawn,               SHCMD("shutdown now")}, 
         { Mod1Mask,              XK_z, spawn,          SHCMD("st") },  // Replace 'st' with your terminal command
-        { Mod1Mask,              XK_e,      spawn,          SHCMD("nautilus") },         
+        { Mod1Mask,              XK_e,      spawn,          SHCMD("nautilus") },
+	{ MODKEY|ShiftMask,           XK_x,      spawn,          SHCMD("surf") },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
