@@ -15,7 +15,7 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
-static const char col_gray1[]       = "#222222";
+static const char col_gray1[]       = "#1e1e1e";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
@@ -133,8 +133,8 @@ static const Key keys[] = {
         { Mod1Mask,              XK_c,      spawn,          SHCMD("chromium") },
 	{Mod1Mask,   XK_s,             spawn,               SHCMD("shutdown now")}, 
         { Mod1Mask,              XK_z, spawn,          SHCMD("st") },  // Replace 'st' with your terminal command
-        { Mod1Mask,              XK_e,      spawn,          SHCMD("nautilus") },
-	{ MODKEY|ShiftMask,           XK_x,      spawn,          SHCMD("surf") },
+	{ Mod1Mask, XK_e, spawn, SHCMD("env GTK_THEME=Adwaita-dark nautilus &") },
+        { MODKEY|ShiftMask,           XK_x,      spawn,          SHCMD("surf") },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
