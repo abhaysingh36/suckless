@@ -1,4 +1,6 @@
 /* See LICENSE file for copyright and license details. */
+#include "movestack.c"
+#include<X11/XF86keysym.h>
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -15,7 +17,7 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
-static const char col_gray1[]       = "#222222";
+static const char col_gray1[]       = "#1e1e1e";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
@@ -80,7 +82,7 @@ static const Layout layouts[] = {
 };
 
 /* key definitions */
-#define MODKEY Mod1Mask
+#define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -95,11 +97,16 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "st", NULL };
-#include "movestack.c"
+static const char *termcmd[]  = { "kitty", NULL };
+static const char  *volumeUp[] = {"wpctl" , "set-volume","@DEFAULT_AUDIO_SINK@","5%+",NULL};
+static const char  *volumeDown[] = {"wpctl" , "set-volume","@DEFAULT_AUDIO_SINK@","5%-",NULL};
+
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+	{0,                             XF86XK_AudioRaiseVolume,spawn,{.v = volumeUp }},
+        {0,                             XF86XK_AudioLowerVolume,spawn,{.v = volumeDown }},
+
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
@@ -130,7 +137,11 @@ static const Key keys[] = {
 	{ MODKEY|Mod4Mask|ShiftMask,    XK_9,      incrovgaps,     {.i = -1 } },
 	{ MODKEY|Mod4Mask,              XK_0,      togglegaps,     {0} },
 	{ MODKEY|Mod4Mask|ShiftMask,    XK_0,      defaultgaps,    {0} },
-
+        { Mod1Mask,              XK_c,      spawn,          SHCMD("chromium") },
+	{Mod1Mask,   XK_s,             spawn,               SHCMD("shutdown now")}, 
+        { Mod1Mask,              XK_z, spawn,          SHCMD("st") },  // Replace 'st' with your terminal command
+	{ Mod1Mask, XK_e, spawn, SHCMD("env GTK_THEME=Adwaita-dark nautilus &") },
+        { MODKEY|ShiftMask,           XK_x,      spawn,          SHCMD("surf") },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
