@@ -1,0 +1,34 @@
+
+#!/bin/sh
+
+cap="$(cat /sys/class/power_supply/BAT0/capacity)"
+status="$(cat /sys/class/power_supply/BAT0/status)"
+estimated="$(acpi -b | grep -E 'remaining|until' | awk '{print $5}')"
+
+# Determine AC connection status based on battery status
+if [ "$status" = "Charging" ] || [ "$status" = "Full" ]; then
+  ac_status="🔌"  # Plugged in
+else
+  ac_status="🔋"  # On battery
+fi
+
+# Determine battery icon based on capacity
+if [ "$cap" -ge 80 ]; then
+  battery_icon="🔋"  # Full battery
+elif [ "$cap" -ge 60 ]; then
+  battery_icon="🔋"  # 3/4 full
+elif [ "$cap" -ge 40 ]; then
+  battery_icon="🔋"  # Half full
+elif [ "$cap" -ge 20 ]; then
+  battery_icon="🔋"  # Low battery
+else
+  battery_icon="🔋"  # Critical battery
+fi
+
+# Display the output
+if [ -z "$estimated" ]; then
+  echo "$battery_icon $cap% : $status : $ac_status"
+else
+  echo "$battery_icon $cap% : $status : $ac_status : $estimated left"
+fi
+

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Get the current volume level
+VOLUME=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2}' | sed 's/%//')
+
+# Output the volume level in a format suitable for dwm block
+echo "Vol: ${VOLUME}%"
+
