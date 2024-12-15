@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Check if blueman-manager is already running
+if pgrep -x "blueman-manager" > /dev/null
+then
+    # Kill blueman-manager
+    killall blueman-manager
+else
+    # Start blueman-manager
+    blueman-manager &
+fi
+
