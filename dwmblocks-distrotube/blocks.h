@@ -2,7 +2,7 @@
 static const Block blocks[] = {
 	{" 🔊 ", "~/.config/suckless/dwmblocks-distrotube/scripts/volume", 1, 10},
 	{"  ", "~/.config/suckless/dwmblocks-distrotube/scripts/battery", 2, 0},
-	 { "", "~/.config/suckless/dwmblocks-distrotube/scripts/scripts/bluemanage", 0, 1 },
+	 { " ", "~/.config/suckless/dwmblocks-distrotube/scripts/bluemanage", 0, 15 },
 	{" 🕑 ", "~/.config/suckless/dwmblocks-distrotube/scripts/clock", 60, 0},
 };
 //sets delimeter between status commands. NULL character ('\0') means no delimeter.

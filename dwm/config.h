@@ -84,7 +84,7 @@ static const Layout layouts[] = {
 /* key definitions */
 #define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
-	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
+	{ Mod1Mask,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
@@ -163,6 +163,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_minus, 		setborderpx,    {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_plus, 		setborderpx,    {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_numbersign, 	setborderpx,    {.i = 0 } },
+	{ Mod1Mask,             XK_Tab,        focusstack,     {.i = +1 } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -173,7 +174,7 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-};
+	{ MODKEY,           XK_y,      spawn,          SHCMD("chromium --new-window https://www.youtube.com/watch?v=fdGWRq1dVBA") },};
 
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
