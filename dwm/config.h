@@ -193,6 +193,9 @@ static const Button buttons[] = {
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
-        { ClkClientWin, MODKEY, Button1, killclient, {0} },
+
+{ ClkClientWin, MODKEY, Button5, setmfact, {.f = -0.05} },
+{ ClkClientWin, MODKEY, Button4, setmfact, {.f = +0.05} },
+	{ ClkClientWin, MODKEY, Button1, killclient, {0} },
 };
 
