@@ -15,13 +15,13 @@ static       int smartgaps          = 0;        /* 1 means no outer gap when the
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
-static const char col_gray1[]       = "#1e1e1e";
+static const char *fonts[]          = { "monospace:size=13" };
+static const char dmenufont[]       = "monospace:size=13";
+static const char col_gray1[]       = "#000000";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
+static const char col_cyan[]        = "#591294";
 static const unsigned int baralpha = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
@@ -84,7 +84,7 @@ static const Layout layouts[] = {
 /* key definitions */
 #define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
-	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
+	{ Mod1Mask,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
@@ -139,9 +139,10 @@ static const Key keys[] = {
 	{ MODKEY|Mod4Mask|ShiftMask,    XK_0,      defaultgaps,    {0} },
         { Mod1Mask,              XK_c,      spawn,          SHCMD("chromium") },
 	{Mod1Mask,   XK_s,             spawn,               SHCMD("shutdown now")}, 
-        { Mod1Mask,              XK_z, spawn,          SHCMD("st") },  // Replace 'st' with your terminal command
+        { Mod1Mask,              XK_z, spawn,          SHCMD("st") },  
 	{ Mod1Mask, XK_e, spawn, SHCMD("env GTK_THEME=Adwaita-dark nautilus &") },
         { MODKEY|ShiftMask,           XK_x,      spawn,          SHCMD("surf") },
+	{ Mod1Mask,              XK_n,      spawn,          SHCMD("kitty -e nvim") },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
@@ -162,6 +163,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_minus, 		setborderpx,    {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_plus, 		setborderpx,    {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_numbersign, 	setborderpx,    {.i = 0 } },
+	{ Mod1Mask,             XK_Tab,        focusstack,     {.i = +1 } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -172,7 +174,7 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-};
+	{ MODKEY,           XK_y,      spawn,          SHCMD("chromium --new-window https://www.youtube.com/watch?v=fdGWRq1dVBA") },};
 
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
@@ -191,5 +193,13 @@ static const Button buttons[] = {
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+
+{ ClkClientWin, MODKEY, Button5, setmfact, {.f = -0.05} },
+{ ClkClientWin, MODKEY, Button4, setmfact, {.f = +0.05} },
+
+{ ClkClientWin, MODKEY, Button1, togglefloating, {0} },
+
+{ ClkClientWin, ControlMask, Button1, killclient, {0} },
+{ ClkClientWin, ControlMask, Button2, killclient, {0} },
 };
 

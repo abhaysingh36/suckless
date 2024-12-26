@@ -199,7 +199,7 @@ static const Button buttons[] = {
 
 { ClkClientWin, MODKEY, Button1, togglefloating, {0} },
 
-{ ClkClientWin, ControlMask, Button1, killclient, {0} },
-{ ClkClientWin, ControlMask, Button2, killclient, {0} },
+{ ClkClientWin, Mod1Mask, Button1, killclient, {0} },
+
 };
 
